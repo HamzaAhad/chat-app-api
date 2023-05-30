@@ -1,0 +1,35 @@
+{
+  "name": "doctrex-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DoctrEx/doctrEx-backend-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DoctrEx/doctrEx-backend-api/issues"
+  },
+  "homepage": "https://github.com/DoctrEx/doctrEx-backend-api#readme",
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "lumie": "^0.1.2",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nodemailer": "^6.8.0",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.27.0"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.5.2"
+  }
+}
