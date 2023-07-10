@@ -8,7 +8,7 @@ const {
 module.exports = {
   "/signup": {
     post: {
-      middlewares: checkDuplicateUsernameOrEmail,
+      // middlewares: checkDuplicateUsernameOrEmail,
       action: signup,
       level: "public",
     },
