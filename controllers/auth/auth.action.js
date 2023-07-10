@@ -12,6 +12,7 @@ module.exports.checkDuplicateUsernameOrEmail = async (req, res, next) => {
   UserModel.findOne({
     where: {
       username: req.body.username,
+      email: req.body.email,
     },
   }).then((user) => {
     if (user) {
@@ -27,34 +28,13 @@ module.exports.checkDuplicateUsernameOrEmail = async (req, res, next) => {
 //Signup Login
 
 module.exports.signup = async (req, res) => {
-  // Username
-  console.log("request", req.body.username, req.body.password, req.body);
-  // res.send({ message: "USER REGISTERED" });
-  // try {
-  //   console.log("request", req.body.username, req.body.password);
-  // const user = await UserModel.create({
-  // username: req?.body?.username,
-  // password: bcrypt.hashSync(req.body.password, 8),
-  // });
   UserModel.create({
-    username: req?.body?.username,
+    name: req?.body?.name,
+    email: req?.body?.email,
     password: bcrypt.hashSync(req.body.password, 8),
-  })
-    .then((user) => {
-      console.log(user);
-      res.status(200).send({ message: "USER REGISTERED" });
-    })
-    .catch((error) => {
-      // Handle the promise rejection
-      console.error(error);
-    });
-  //   if (user) {
-  //     res.send({ message: "USER REGISTERED" });
-  //   }
-  // } catch (error) {
-  //   // Handle the error
-  //   console.error(error);
-  // }
+  }).then(() => {
+    res.send({ message: "USER REGISTERED" });
+  });
 };
 
 module.exports.signin = async (req, res) => {
@@ -85,7 +65,7 @@ module.exports.signin = async (req, res) => {
 
       res.status(200).send({
         id: user.id,
-        username: user.username,
+        name: user.username,
         email: user.email,
         accessToken: token,
       });
