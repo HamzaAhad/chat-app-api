@@ -1,5 +1,5 @@
 const db = require("../../models/index");
-import { Op } from "sequelize";
+const { Op } = require("sequelize");
 const UserModel = db.users;
 const FriendRequestModel = db.friend_requests;
 
