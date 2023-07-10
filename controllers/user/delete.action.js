@@ -9,7 +9,7 @@ module.exports.deleteUsers = async (request, response) => {
       body: { userIds },
     } = request;
 
-    const deletedUsers = await UserModel.destroy({
+    const deletedUser = await UserModel.destroy({
       where: {
         id: {
           [Op.in]: userIds,

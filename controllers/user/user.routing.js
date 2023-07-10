@@ -1,5 +1,5 @@
 const { get } = require("./get.action.js");
-const { deleteUser } = require("./delete.action.js");
+const { deleteUsers } = require("./delete.action.js");
 
 module.exports = {
   "/": {
@@ -8,7 +8,7 @@ module.exports = {
       level: "public",
     },
     post: {
-      action: deleteUser,
+      action: deleteUsers,
       level: "public",
     },
   },
