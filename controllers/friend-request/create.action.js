@@ -1,16 +1,17 @@
 const db = require("../../models/index");
+const { Op } = require("sequelize");
 const UserModel = db.users;
 const FriendRequestModel = db.friend_requests;
 
 module.exports.create = async (request, response) => {
   try {
     const {
-      body: { senderId, receiverId },
+      body: { senderIds, receiverId },
     } = request;
 
-    const sender = await UserModel.findOne({
+    const senders = await UserModel.findAll({
       where: {
-        id: senderId,
+        id: { [Op.in]: senderIds },
       },
     });
 
@@ -20,16 +21,20 @@ module.exports.create = async (request, response) => {
       },
     });
 
-    if (!receiver || !sender) {
+    if (!receiver || !senders) {
       response.status(404).json("User Not Found");
     }
 
-    const data = await FriendRequestModel.create({
-      senderId,
-      receiverId,
-      senderName: sender?.name,
-      status: "sent",
+    const body = senders?.map((sender) => {
+      return {
+        senderId: sender?.senderId,
+        receiverId: sender?.receiverId,
+        senderName: sender?.name,
+        status: "sent",
+      };
     });
+
+    const data = await FriendRequestModel.bulkCreate(body);
 
     response.status(200).json("Send request has been sent successfully");
   } catch {

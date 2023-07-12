@@ -5,12 +5,12 @@ const FriendRequestModel = db.friend_requests;
 module.exports.accept = async (request, response) => {
   try {
     const {
-      body: { id },
+      body: { senderId, recieverId },
     } = request;
 
     const req = await FriendRequestModel.findOne({
       where: {
-        id,
+        id: [senderId, recieverId],
       },
     });
 
@@ -20,14 +20,14 @@ module.exports.accept = async (request, response) => {
 
     const data = await FriendRequestModel.update(
       {
-        status: "sent",
+        status: "accepted",
       },
       {
-        where: { id },
+        where: { senderId, recieverId },
       }
     );
 
-    response.status(200).json("Send request has been sent successfully");
+    response.status(200).json("Send request have been accepted");
   } catch {
     response.status(500).json("Some Error Occured");
   }

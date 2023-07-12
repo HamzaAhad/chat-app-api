@@ -12,8 +12,16 @@ module.exports = {
       senderName: {
         type: Sequelize.STRING,
       },
+      senderId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
+      recieverId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+      },
       status: {
-        type: Sequelize.ENUM("sent", "accepted", "rejected"),
+        type: Sequelize.ENUM("sent", "accepted", "rejected", "deleted"),
       },
       createdAt: {
         allowNull: false,
